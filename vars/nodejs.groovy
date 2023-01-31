@@ -1,12 +1,12 @@
-def lintChecks() {
+def lintChecks(COMPONENT) {
         sh "echo Installing JSLINT"
         sh "npm install jslint"
         sh "ls -ltr node_modules/jslint/bin/"
         // sh "./node_modules/jslint/bin/jslint.js server.js"
-        sh "echo lint checks completed.....!!!!!"
+        sh "echo lint checks completed for ${COMPONENT}.....!!!!!"
 }
 
-def call()                                              // call is the default function that's called by default.
+def call(COMPONENT)                                              // call is the default function that's called by default.
 {
     pipeline {
         agent any 
@@ -14,7 +14,7 @@ def call()                                              // call is the default f
             stage('Lint Checks') {
                 steps {
                     script {
-                        lintChecks()                    // If the function is in the same file, no need to call the function with the fileName as prefix.
+                        lintChecks(COMPONENT)                    // If the function is in the same file, no need to call the function with the fileName as prefix.
                     }
                 }
             }
