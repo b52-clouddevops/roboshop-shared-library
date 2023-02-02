@@ -5,11 +5,7 @@ def lintChecks(COMPONENT) {
         sh "echo lint checks completed for ${COMPONENT}.....!!!!!"
 }
 
-def sonarChecks(COMPONENT) {
-        sh "echo Starting Code Quality Analysis"
-        sh "sonar-scanner -Dsonar.host.url=http://172.31.1.207:9000  -Dsonar.sources=. -Dsonar.projectKey=catalogue  -Dsonar.login=admin -Dsonar.password=password"
 
-}
 
 def call(COMPONENT)                                              // call is the default function that's called by default.
 {
@@ -24,13 +20,7 @@ def call(COMPONENT)                                              // call is the 
                 }
             }
 
-            stage('Sonar Checks') {
-                steps {
-                    script {
-                        sonarChecks(COMPONENT)                    
-                    }
-                }
-            }
+
 
             stage('Downloading the dependencies') {
                 steps {
