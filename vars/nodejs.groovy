@@ -12,7 +12,7 @@ def sonarChecks(COMPONENT) {
         echo Starting Code Quality Analysis
         sonar-scanner -Dsonar.host.url=http://${SONAR_URL}:9000  -Dsonar.sources=. -Dsonar.projectKey=${COMPONENT}  -Dsonar.login=${SONAR_USR} -Dsonar.password=${SONAR_PSW}
         curl https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/sonar-scanner/quality-gate > quality-gata.sh
-        ./quality-gata.sh ${SONAR_USR} ${SONAR_PSW} ${SONAR_URL} ${COMPONENT}
+
        
        '''
 }
