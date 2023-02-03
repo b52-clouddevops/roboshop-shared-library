@@ -40,6 +40,30 @@ def call(COMPONENT)                                              // call is the 
                 }
             }
 
+            stage('Test Cases') {
+                steps {
+                    parallel {
+                        stage('Unit Tests'){
+                            steps {
+                                sh "echo Unit Testing ......."
+                            }
+                        }
+
+                        stage('Integration Tests'){
+                            steps {
+                                sh "echo Integration Testing ......."
+                            }
+                        }
+
+                        stage('Functional Tests'){
+                            steps {
+                                sh "echo Functional Testing ......."
+                            }
+                        }
+                    }
+                }
+            }
+
             stage('Downloading the dependencies') {
                 steps {
                     sh "mvn clean package"
