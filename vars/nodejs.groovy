@@ -56,7 +56,7 @@ def call(COMPONENT)                                              // call is the 
                     }
             }
 
-            stage('Downloading the dependencies') {
+            stage('Preparing the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
                     }
@@ -72,6 +72,7 @@ def call(COMPONENT)                                              // call is the 
                     }
                 steps {
                     sh "curl -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip"
+                    sh "echo $?"
                 }
             }
         } // End of Stages
