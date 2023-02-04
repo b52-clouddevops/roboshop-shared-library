@@ -5,15 +5,6 @@ def lintChecks(COMPONENT) {
         sh "echo lint checks completed for ${COMPONENT}.....!!!!!"
 }
 
-def sonarChecks(COMPONENT) {   
-       sh  "echo Starting Code Quality Analysis"
-       sh  "mvn clean compile"
-    //    sh  "sonar-scanner -Dsonar.host.url=http://${SONAR_URL}:9000  -Dsonar.java.binaries=target/ -Dsonar.projectKey=${COMPONENT}  -Dsonar.login=${SONAR_USR} -Dsonar.password=${SONAR_PSW}"
-    //    sh  "curl https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/sonar-scanner/quality-gate > quality-gata.sh"
-    //    sh  "bash -x quality-gata.sh ${SONAR_USR} ${SONAR_PSW} ${SONAR_URL} ${COMPONENT}"
-       sh "Sonar Checks Completed"
-}
-
 def call(COMPONENT)                                              // call is the default function that's called by default.
 {
     pipeline {
