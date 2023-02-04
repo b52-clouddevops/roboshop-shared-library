@@ -65,8 +65,20 @@ def call(COMPONENT)                                              // call is the 
             }
 
             stage('Downloading the dependencies') {
+                when { 
+                    expression { env.TAG_NAME != null } 
+                    }
                 steps {
                     sh "mvn clean package"
+                }
+            }
+
+            stage('Uploading the artifact') {
+                when { 
+                    expression { env.TAG_NAME != null } 
+                    }
+                steps {
+                    sh "echo uploading artifact to nexus"
                 }
             }
         } // End of Stages
