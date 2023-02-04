@@ -56,6 +56,16 @@ def call(COMPONENT)                                              // call is the 
                     }
             }
 
+            stage('Artifact Validation On Nexus') {
+                steps {
+                    sh "checking whether artifact exists of not. If it doesn't exist, then only proceed with Preparation and Upload"
+                    script {
+                        env.STATUS_CODE=sh(returnStdout: true, script: 'curl http://172.31.4.26:8081/service/rest/${COMPONENT}/browse/${COMPONENT}/ | grep ${COMPONENT}-${TAG_NAME}')
+                        print STATUS_CODE
+                    }
+                }
+            }
+
             stage('Preparing the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
