@@ -57,6 +57,9 @@ def call(COMPONENT)                                              // call is the 
             }
 
             stage('Artifact Validation On Nexus') {
+                when { 
+                    expression { env.TAG_NAME != null } 
+                    }
                 steps {
                     sh "echo checking whether artifact exists of not. If it doesnt exist then only proceed with Preparation and Upload"
                     script {
