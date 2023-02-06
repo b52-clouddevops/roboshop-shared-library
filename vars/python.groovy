@@ -5,6 +5,7 @@ def call() {
         env.ARGS="-Dsonar.sources=."
         common.sonarChecks()  
         common.testCases() 
+        common.artifacts()
     }
 }
 // def call(COMPONENT)                                              // call is the default function that's called by default.
