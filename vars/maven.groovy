@@ -54,23 +54,29 @@ def call(COMPONENT)                                              // call is the 
                     }
                 }
 
-            stage('Downloading the dependencies') {
+            stage('Preparing the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
+                    expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
                     sh "mvn clean package"
+                    sh "mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar"
+                    sh "zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar"
+                    sh "ls -ltr"
                 }
             }
 
             stage('Uploading the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
+                    expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
-                    sh "echo uploading artifact to nexus"
+                    sh "curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip"
                 }
             }
+        
         } // End of Stages
     }
 }
