@@ -66,7 +66,6 @@ def call(COMPONENT)                                              // call is the 
                     }
                 }
             }
-
             stage('Preparing the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
