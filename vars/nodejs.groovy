@@ -69,6 +69,7 @@ def call(COMPONENT)                                              // call is the 
             stage('Preparing the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
+                    expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
                     sh "npm install"
@@ -79,6 +80,7 @@ def call(COMPONENT)                                              // call is the 
             stage('Uploading the artifact') {
                 when { 
                     expression { env.TAG_NAME != null } 
+                    expression { env.UPLOAD_STATUS == "" }
                     }
                 steps {
                     sh "curl -f -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://${NEXUS_URL}:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip"
