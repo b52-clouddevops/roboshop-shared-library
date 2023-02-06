@@ -60,7 +60,7 @@ def call(COMPONENT)                                              // call is the 
                 steps {
                     sh "echo checking whether artifact exists of not. If it doesnt exist then only proceed with Preparation and Upload"
                     script {
-    env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl -L -s http://${NEXUS_URL}:8081/service/rest/repository/browse/${COMPONENT} | grep ${COMPONENT}-${TAG_NAME}.zip || true" )
+    env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl -L -s http://${NEXUS_URL}:8081/service/rest/repository/browse/${COMPONENT} | grep ${COMPONENT}-${TAG_NAME}.zip" )
     print UPLOAD_STATUS
                     }
                 }
