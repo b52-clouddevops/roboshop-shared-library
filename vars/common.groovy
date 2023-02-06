@@ -61,3 +61,44 @@ def testCases() {
                     },
             )
        }
+
+
+def artifacts() {
+       stage('Artifact Validation On Nexus') {
+              sh "echo checking whether artifact exists of not. If it doesnt exist then only proceed with Preparation and Upload"
+                   env.UPLOAD_STATUS=sh(returnStdout: true, script: "curl -L -s http://${NEXUS_URL}:8081/service/rest/repository/browse/${COMPONENT} | grep ${COMPONENT}-${TAG_NAME}.zip || true" )
+       }
+
+       if(env.UPLOAD_STATUS == "") {
+              stage('Preparing the artifacts') {
+                     if(env.APP == "maven") {
+                            sh ''' 
+                                   mvn clean package
+                                   mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+                                   zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+                            '''
+                     }
+                     else if(env.APP == "nodejs") {
+                            sh ''' 
+                                   npm install
+                                   zip ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+                            '''
+                     }
+                     else if(env.APP == "python") {
+                            sh ''' 
+                                   zip -r ${COMPONENT}-${TAG_NAME}.zip *.py *.ini requirements.txt
+                            '''
+                     }
+                     else if(env.APP == "angularjs") {
+                            sh ''' 
+                                   zip -r ${COMPONENT}-${TAG_NAME}.zip *
+                            '''
+                     }
+                     else {
+                            sh ''' 
+                                   echo "Golang is your task"
+                            '''
+                     }
+              }
+       }
+}       
