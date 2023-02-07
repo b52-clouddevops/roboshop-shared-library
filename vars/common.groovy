@@ -36,8 +36,9 @@ def lintChecks() {
                       sh "echo Installing ANGULAR LINT"
                       sh "echo lint checks completed for ${COMPONENT}.....!!!!!"
           }
-          else 
+          else {
                      sh "echo performing generic lint cheks"
+              }
        }
 }
 
