@@ -1,7 +1,7 @@
 def call() {
      node {
         env.APP = "maven"
-        lintChecks()
+        common.lintChecks()
         sh "mvn clean compile"
         env.ARGS="-Dsonar.java.binaries=target/"
         common.sonarChecks() 
