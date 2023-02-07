@@ -2,13 +2,14 @@ def call() {
     node {
         git branch: 'main', url: "https://github.com/b52-clouddevops/${COMPONENT}.git"
         env.APP = "python"
-        lintChecks()
+        common.lintChecks()
         env.ARGS="-Dsonar.sources=."
         common.sonarChecks()  
         common.testCases() 
         common.artifacts()
     }
 }
+
 // def call(COMPONENT)                                              // call is the default function that's called by default.
 // {
 //     pipeline {
