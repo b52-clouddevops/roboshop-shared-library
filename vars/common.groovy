@@ -92,7 +92,8 @@ def artifacts() {
                      }
                      else if(env.APP == "angularjs") {
                             sh ''' 
-                                   zip -r ${COMPONENT}-${TAG_NAME}.zip *
+                                   cd static
+                                   zip -r ../${COMPONENT}-${TAG_NAME}.zip *
                             '''
                      }
                      else {
