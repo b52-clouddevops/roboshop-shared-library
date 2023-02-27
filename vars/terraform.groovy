@@ -2,8 +2,8 @@ def call() {
     properties(
         [
             parameters([
-                    string(name: 'ENV', choices: 'dev\nprod' , description: 'Chose an environment' ),
-                    string(name: 'ACTION', choices: 'apply\ndestroy' , description: 'Chose action to be apply or destroy')
+                    choice(name: 'ENV', choices: 'dev\nprod' , description: 'Chose an environment' ),
+                    choice(name: 'ACTION', choices: 'apply\ndestroy' , description: 'Chose action to be apply or destroy')
             ])   
         ])
     node {
