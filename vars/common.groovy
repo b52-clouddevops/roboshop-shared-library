@@ -83,6 +83,7 @@ def artifacts() {
                             sh ''' 
                                    npm install
                                    zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+                                   
                             '''
                      }
                      else if(env.APP == "python") {
