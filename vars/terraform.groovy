@@ -1,4 +1,9 @@
 def call() {
+    
+    if (!env.TF_DIRECTORY) {
+            env.TF_DIRECTORY = "./"
+    }
+
     properties(
         [
             parameters([
@@ -13,6 +18,7 @@ def call() {
         
         stage('Terraform Init') {
                 sh ''' 
+                       cd ${TF_DIRECTORY}
                        terrafile -f env-${ENV}/Terrafile
                        terraform init -backend-config=env-${ENV}/${ENV}-backend.tfvars
                    '''            
