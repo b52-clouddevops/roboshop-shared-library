@@ -9,6 +9,7 @@ def call() {
             parameters([
                     choice(name: 'ENV', choices: 'dev\nprod' , description: 'Chose an environment' ),
                     choice(name: 'ACTION', choices: 'apply\ndestroy' , description: 'Chose action to be apply or destroy')
+                    string(name: 'APP_VERSION', choices: 'APP_VERSION' , description: 'Chose the app version to be deployed -  IGNORE THIS VALUE FOR INFRA')
             ])   
         ])
     node {
