@@ -8,7 +8,7 @@ def call() {
         common.lintChecks()
 
         stage('Docker Build') {
-                sh "docker build -t 355449129696.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:latest"
+                sh "docker build -t 355449129696.dkr.ecr.us-east-1.amazonaws.com/${COMPONENT}:latest ."
                 sh "docker images "
         }
     if ( env.TAG_NAME != null ) {
