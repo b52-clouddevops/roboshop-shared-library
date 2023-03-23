@@ -115,7 +115,7 @@ def artifacts() {
 
 
 
-def release(appType) {
+def release(APP) {
   stage('Preparing Artifact') {
     if (env.APP == "nodejs") {
       sh '''
