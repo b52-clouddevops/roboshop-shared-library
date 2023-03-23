@@ -143,4 +143,6 @@ def release(APP) {
         zip -r ${COMPONENT}-${TAG_NAME}.zip *
         zip -d ${COMPONENT}-${TAG_NAME}.zip Jenkinsfile 
       '''
+       }
     }
+}
