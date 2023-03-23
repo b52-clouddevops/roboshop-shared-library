@@ -112,3 +112,35 @@ def artifacts() {
               }
        }
 }       
+
+
+
+def release(appType) {
+  stage('Preparing Artifact') {
+    if (env.APP == "nodejs") {
+      sh '''
+        npm install 
+        zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js schema
+      '''
+    }
+
+    if (env.APP == "java") {
+      sh '''
+        mvn package 
+        cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar 
+        zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar schema
+      '''
+    }
+
+    if (env.APP == "python") {
+      sh '''
+        zip -r ${COMPONENT}-${TAG_NAME}.zip *.ini *.py *.txt
+      '''
+    }
+
+    if (aenv.APP == "angularjs") {
+      sh '''
+        zip -r ${COMPONENT}-${TAG_NAME}.zip *
+        zip -d ${COMPONENT}-${TAG_NAME}.zip Jenkinsfile 
+      '''
+    }
