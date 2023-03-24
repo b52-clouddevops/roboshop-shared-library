@@ -22,7 +22,7 @@ def call() {
                 '''
                 }
 
-                if (env.APP == "java") {
+                if (env.APP == "maven") {
                 sh '''
                     mvn package 
                     cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar 
